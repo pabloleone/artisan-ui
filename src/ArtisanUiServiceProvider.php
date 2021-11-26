@@ -50,7 +50,7 @@ class ArtisanUiServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('artisan-ui', function () {
-            return new ArtisanUi;
+            return new ArtisanUi();
         });
     }
 }

@@ -13,11 +13,13 @@
         {
             "name": "Pablo Leone",
             "email": "info@pabloleone.com",
-            "role": "Developer"
+            "role": "Developer",
+            "homepage": "https://github.com/pabloleone/artisan-ui"
         }
     ],
     "require": {
         "php": "^7.4|^8.0",
+        "friendsofphp/php-cs-fixer": "^3.3",
         "illuminate/support": "^8.0"
     },
     "require-dev": {

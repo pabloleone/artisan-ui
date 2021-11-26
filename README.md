@@ -20,6 +20,12 @@ composer require pabloleone/artisan-ui
 
 Once installed, if you are not using automatic package discovery, then you need to register the `\Pabloleone\ArtisanUi\ArtisanUiServiceProvider::class` service provider in your `config/app.php`.
 
+### Code Style
+
+```bash
+vendor/bin/php-cs-fixer fix
+```
+
 ### Testing
 
 ```bash

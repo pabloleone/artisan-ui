@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Pabloleone\ArtisanUi\Http\Middleware\Enabled;
 
-Route::group(['before' => 'csrf', 'middleware' => [Enabled::class, 'web']], function() {
+Route::group(['before' => 'csrf', 'middleware' => [Enabled::class, 'web']], function () {
     Route::get(
         config('artisan-ui.url'),
         'Pabloleone\ArtisanUi\Http\Controllers\Artisan@main'

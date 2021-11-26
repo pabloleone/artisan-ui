@@ -35,7 +35,7 @@ class Execute extends FormRequest
     public function rules()
     {
         return [
-            'command' => ['required', 'string', new ValidCommand],
+            'command' => ['required', 'string', new ValidCommand()],
             'arguments' => [
                 'array',
                 new ValidCommandParameters($this->getAvailableArguments($this->request->get('command')))

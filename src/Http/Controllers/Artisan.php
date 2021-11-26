@@ -10,8 +10,8 @@ use Pabloleone\ArtisanUi\ArtisanUi;
 use Illuminate\Support\Facades\Artisan as LaravelArtisan;
 use Pabloleone\ArtisanUi\Http\Requests\Execute;
 
-class Artisan extends BaseController {
-
+class Artisan extends BaseController
+{
     public function main()
     {
         $sections = (new ArtisanUi())->get();
@@ -78,5 +78,4 @@ class Artisan extends BaseController {
             compact('exitCode', 'output', 'sections')
         );
     }
-
 }

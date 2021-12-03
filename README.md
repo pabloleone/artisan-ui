@@ -1,12 +1,13 @@
-# Very short description of the package
+# Artisan UI
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/pabloleone/artisan-ui.svg?style=flat-square)](https://packagist.org/packages/pabloleone/artisan-ui)
-[![Total Downloads](https://img.shields.io/packagist/dt/pabloleone/artisan-ui.svg?style=flat-square)](https://packagist.org/packages/pabloleone/artisan-ui)
+[![Latest Stable Version](http://poser.pugx.org/pabloleone/artisan-ui/v)](https://packagist.org/packages/pabloleone/artisan-ui) [![Total Downloads](http://poser.pugx.org/pabloleone/artisan-ui/downloads)](https://packagist.org/packages/pabloleone/artisan-ui) [![Latest Unstable Version](http://poser.pugx.org/pabloleone/artisan-ui/v/unstable)](https://packagist.org/packages/pabloleone/artisan-ui) [![License](http://poser.pugx.org/pabloleone/artisan-ui/license)](https://packagist.org/packages/pabloleone/artisan-ui) [![PHP Version Require](http://poser.pugx.org/pabloleone/artisan-ui/require/php)](https://packagist.org/packages/pabloleone/artisan-ui)
 ![GitHub Actions](https://github.com/pabloleone/artisan-ui/actions/workflows/main.yml/badge.svg)
 
 A nice GUI for Laravel Artisan, ready out of the box, configurable and handy for non-CLI experienced developers.
 
-Supported commands must be developed in a way it can be fully set up by using arguments and options to avoid CLI interactions that CANNOT be replicated on WEB UI. Commands issuing workers are not supported.
+> Supported commands must be developed in a way they can be fully set up by using arguments and options to avoid CLI interactions that CANNOT be reproduced on WEB.
+>
+> Commands issuing workers are not yet supported.
 
 ## Installation
 
@@ -19,6 +20,22 @@ composer require pabloleone/artisan-ui
 ## Usage
 
 Once installed, if you are not using automatic package discovery, then you need to register the `\Pabloleone\ArtisanUi\ArtisanUiServiceProvider::class` service provider in your `config/app.php`.
+
+## Extend
+
+### Output & Description
+
+To decorate the command output and description, publish the package configuration (`php artisan vendor:publish pabloleone/artisan-ui`) and add your class decorators in the specified array. Your decorators must implement the interface `Pabloleone\ArtisanUi\Models\Decorators\DecoratorInterface`.
+
+### Theme
+
+You can create your own theme for Artisan UI. To do so, publish the configuration and update the `theme` value with the name of the new theme you created inside its folder `resources/vendor/pabloleone/artisan-ui/views/themes/{YOUR_THEME}`
+
+```php
+...
+    'theme' => 'YOUR_THEME',
+...
+```
 
 ### Code Style
 
@@ -53,6 +70,6 @@ If you discover any security related issues, please email [info@pabloleone.com](
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## Laravel Package Boilerplate
+## TODO
 
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
+Visit this [Trello Board](https://trello.com/b/PgS4yL8h/artisan-ui) to see the pending tasks for this package.

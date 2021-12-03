@@ -8,9 +8,10 @@ class Section
 
     public array $commands = [];
 
-    public function __construct(string $id)
+    public function setSectionId(string $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
     public function addCommand(Command $command): void

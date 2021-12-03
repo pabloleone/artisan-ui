@@ -6,5 +6,7 @@ return [
     'options' => 'Options',
     'arguments' => 'Arguments',
     'execute' => 'Execute',
-    'availableCommands' => 'Available commands'
+    'tryOut' => 'Try Out',
+    'availableCommands' => 'Available commands',
+    'error' => 'Error',
 ];

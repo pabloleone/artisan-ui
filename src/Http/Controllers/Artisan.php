@@ -2,19 +2,28 @@
 
 namespace Pabloleone\ArtisanUi\Http\Controllers;
 
-use Pabloleone\ArtisanUi\Events\AfterExecuteArtisanCommand;
-use Pabloleone\ArtisanUi\Events\BeforeExecuteArtisanCommand;
 use Pabloleone\ArtisanUi\Models\Command;
 use Illuminate\Routing\Controller as BaseController;
 use Pabloleone\ArtisanUi\ArtisanUi;
-use Illuminate\Support\Facades\Artisan as LaravelArtisan;
 use Pabloleone\ArtisanUi\Http\Requests\Execute;
+use Illuminate\Support\Facades\App;
 
 class Artisan extends BaseController
 {
+    private Command $command;
+
+    private ArtisanUi $artisanUi;
+
+    public function __construct(Command $command, ArtisanUi $artisanUi)
+    {
+        $this->command = $command;
+        $this->artisanUi = $artisanUi;
+    }
+
     public function main()
     {
-        $sections = (new ArtisanUi())->get();
+        $sections = $this->artisanUi->getSectionsTree();
+
         return view(
             'artisan-ui::themes.'.config('artisan-ui.theme').'.main',
             compact('sections')
@@ -23,59 +32,30 @@ class Artisan extends BaseController
 
     public function execute(Execute $request)
     {
-        $command = $request->input('command');
+        $commandId = $request->input('command');
 
-        $artisanCommand = new Command(LaravelArtisan::all()[$command]);
+        $this->command->setCommand($request->artisanCommands[$commandId]);
 
-        $artisanCommandArguments = $artisanCommand->getArguments();
+        $parameters = $request->getParameters(
+            $request->input('command'),
+            $request->input('arguments'),
+            $request->input('options'),
+        );
 
-        $arguments = collect($request->input('arguments'))->map(function ($value, $key) use ($artisanCommandArguments) {
-            $finalValue = $value;
-            foreach ($artisanCommandArguments as $argument) {
-                if ($argument->getName() === $key && $argument->isArray()) {
-                    $finalValue = explode(',', $value);
-                }
-            }
-            return $finalValue;
-        });
+        $this->command->setParameters($parameters->toArray());
 
-        $artisanCommandOptions = $artisanCommand->getOptions();
+        $exitCode = $this->command->run();
 
-        $options = collect($request->input('options'))->map(function ($value, $key) use ($artisanCommandOptions) {
-            $finalValue = $value;
-            foreach ($artisanCommandOptions as $option) {
-                if ($option->getName() === $key && $option->isArray()) {
-                    $finalValue = explode(',', $value);
-                }
-            }
-            return $finalValue;
-        })->mapWithKeys(function ($value, $key) use ($request) {
-            return (strpos($key, '--') === false) ? ['--'.$key => $value] : [$key => $value];
-        });
+        $output = $this->command->getOutput();
 
-        $parameters = $arguments->merge($options)->filter(function ($value) {
-            return !is_null($value);
-        });
+        $sections = $this->artisanUi->getSectionsTree();
 
-        $exitCode = '';
-        $output = '';
-
-        try {
-            event(new BeforeExecuteArtisanCommand($command, $parameters->toArray()));
-            $exitCode = LaravelArtisan::call($command, $parameters->toArray());
-            $output = LaravelArtisan::output();
-        } catch (\RuntimeException $e) {
-            $output = $e->getMessage();
-            $exitCode = '1';
-        } finally {
-            event(new AfterExecuteArtisanCommand($exitCode, $output));
-        }
-
-        $sections = (new ArtisanUi())->get();
-
+        // TODO: Display confirmation alert with custom messages for certain
+        // commands which execution can cause disruption or when env is
+        // production (ex. down command)
         return view(
             'artisan-ui::themes.'.config('artisan-ui.theme').'.main',
-            compact('exitCode', 'output', 'sections')
+            compact('exitCode', 'output', 'sections', 'commandId')
         );
     }
 }

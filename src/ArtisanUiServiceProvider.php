@@ -49,8 +49,8 @@ class ArtisanUiServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/artisan-ui.php', 'artisan-ui');
 
         // Register the main class to use with the facade
-        $this->app->singleton('artisan-ui', function () {
-            return new ArtisanUi();
-        });
+        // $this->app->singleton('artisan-ui', function () {
+        //     return new ArtisanUi();
+        // });
     }
 }

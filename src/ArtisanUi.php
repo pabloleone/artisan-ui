@@ -9,62 +9,64 @@ use Pabloleone\ArtisanUi\Models\Section;
 
 class ArtisanUi
 {
-    private Collection $sections;
-
-    private Collection $artisanCommands;
-
     public function __construct()
     {
         $this->artisanCommands = collect(Artisan::all());
-
-        $availableCommands = $this->getAvailableCommands();
-
-        $availableSections = $this->getAvailableSectionsFromCommands($availableCommands);
-
-        $this->sections = $this->getSections($availableSections, $availableCommands);
     }
 
-    public function get()
-    {
-        return $this->sections;
-    }
-
-    private function getAvailableCommands(): Collection
+    public function getAvailableCommands(): Collection
     {
         return $this->artisanCommands->sort()->filter(function ($command) {
             return !in_array($command->getName(), config('artisan-ui.excluded'));
         });
     }
 
-    private function getAvailableSectionsFromCommands(Collection $commands): Collection
+    public function getAvailableSectionsFromCommands(): Collection
     {
-        return $commands->map(function ($command) {
-            $segments = explode(':', $command->getName());
-            if (count($segments) > 1) {
-                $segments = $segments[0];
-            } else {
-                $segments = '';
-            }
-            return $segments;
-        })->unique()->values()->sort();
+        return $this->getAvailableCommands()
+            ->map(function ($command) {
+                $commandSectionId = '';
+                $segments = explode(':', $command->getName());
+                if (count($segments) > 1) {
+                    $commandSectionId = $segments[0];
+                }
+                return $commandSectionId;
+            })
+            ->unique()
+            ->values()
+            ->sort();
     }
 
-    public function getSections(Collection $sections, Collection $commands): Collection
+    public function getSectionsTree(): Collection
     {
-        return $sections->map(function ($sectionId) use ($commands) {
-            $section = new Section($sectionId);
-            $commands->filter(function ($command) use ($sectionId) {
-                if ($sectionId === "" && strpos($command->getName(), ':') === false) {
-                    return true;
-                }
-                if ($sectionId !== '' && strpos(explode(':', $command->getName())[0], $sectionId) !== false) {
-                    return true;
-                }
-                return false;
-            })->sort()->each(function ($sectionCommand) use ($section) {
-                $section->addCommand(new Command(Artisan::all()[$sectionCommand->getName()]));
-            });
+        $commands = $this->getAvailableCommands();
+        return $this->getAvailableSectionsFromCommands()->map(function ($sectionId) use ($commands) {
+            $section = new Section();
+            $section->setSectionId($sectionId);
+
+            $sectionCommands = $this->getCommandsBySectionId($sectionId, $commands)->sort();
+
+            foreach ($sectionCommands as $sectionCommand) {
+                $command = new Command();
+                $command->setCommand($sectionCommand);
+                $section->addCommand($command);
+            }
+
             return $section;
+        });
+    }
+
+    private function getCommandsBySectionId(string $sectionId, $commands): Collection
+    {
+        return $commands->filter(function ($command) use ($sectionId) {
+            if ($sectionId === "" && strpos($command->getName(), ':') === false) {
+                return true;
+            }
+            $commandIdSegments = explode(':', $command->getName());
+            if ($sectionId !== '' && strpos($commandIdSegments[0], $sectionId) !== false) {
+                return true;
+            }
+            return false;
         });
     }
 }

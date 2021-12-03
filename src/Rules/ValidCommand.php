@@ -7,14 +7,16 @@ use Illuminate\Support\Facades\Artisan;
 
 class ValidCommand implements Rule
 {
+    private array $artisanCommmands;
+
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $artisanCommmands)
     {
-        //
+        $this->artisanCommmands = $artisanCommmands;
     }
 
     /**
@@ -26,7 +28,7 @@ class ValidCommand implements Rule
      */
     public function passes($attribute, $value)
     {
-        return in_array($value, collect(Artisan::all())->keys()->toArray());
+        return in_array($value, collect($this->artisanCommmands)->keys()->toArray());
     }
 
     /**

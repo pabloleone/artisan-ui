@@ -6,7 +6,7 @@
         "artisan-ui",
         "gui"
     ],
-    "homepage": "https://github.com/pabloleone/artisan-ui",
+    "homepage": "https://pabloleone.github.io/artisan-ui/",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -14,7 +14,7 @@
             "name": "Pablo Leone",
             "email": "info@pabloleone.com",
             "role": "Developer",
-            "homepage": "https://github.com/pabloleone/artisan-ui"
+            "homepage": "https://pabloleone.github.io/artisan-ui/"
         }
     ],
     "require": {

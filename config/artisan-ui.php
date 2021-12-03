@@ -46,12 +46,29 @@ return [
     */
 
     'excluded' => [
+        // TODO: explain why each of these commands have been disabled
         'serve',
         'tinker',
         'queue:listen',
         'queue:monitor',
         'schedule:work',
         'queue:work',
-        'sail:install'
+        'sail:install',
+        'model:prune'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Artisan UI Output Decorators
+    |--------------------------------------------------------------------------
+    |
+    | This option contains a list of decorators that are applied to the output
+    | of the arisan commands.
+    |
+    */
+
+    'decorators' => [
+        // TODO: add decorators to commands that require them
+        // 'inspire' => Pabloleone\ArtisanUi\Models\Decorators\Inspire::class,
     ]
 ];

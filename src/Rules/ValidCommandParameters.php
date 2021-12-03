@@ -28,9 +28,10 @@ class ValidCommandParameters implements Rule
     public function passes($attribute, $value)
     {
         $validParameters = $this->validParameters;
-        $invalidParameters = collect($value)->filter(function ($value, $key) use ($validParameters) {
-            return !in_array($key, $validParameters);
-        });
+        $invalidParameters = collect($value)
+            ->filter(function ($value, $key) use ($validParameters) {
+                return !in_array($key, $validParameters);
+            });
 
         return (empty($invalidParameters->toArray()));
     }

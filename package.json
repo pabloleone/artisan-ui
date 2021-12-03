@@ -1,0 +1,23 @@
+{
+  "name": "artisan-ui",
+  "version": "0.1.0",
+  "description": "A GUI for Laravel Artisan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pabloleone/artisan-ui.git"
+  },
+  "keywords": [
+    "pabloleone",
+    "artisan-ui",
+    "gui"
+  ],
+  "author": "Pablo Leone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pabloleone/artisan-ui/issues"
+  },
+  "homepage": "https://pabloleone.github.io/artisan-ui/",
+  "devDependencies": {
+    "semantic-release": "^18.0.1"
+  }
+}

@@ -1,37 +1,75 @@
-## Welcome to GitHub Pages
+# Artisan UI
 
-You can use the [editor on GitHub](https://github.com/pabloleone/artisan-ui/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+[![Latest Stable Version](http://poser.pugx.org/pabloleone/artisan-ui/v)](https://packagist.org/packages/pabloleone/artisan-ui) [![Total Downloads](http://poser.pugx.org/pabloleone/artisan-ui/downloads)](https://packagist.org/packages/pabloleone/artisan-ui) [![Latest Unstable Version](http://poser.pugx.org/pabloleone/artisan-ui/v/unstable)](https://packagist.org/packages/pabloleone/artisan-ui) [![License](http://poser.pugx.org/pabloleone/artisan-ui/license)](https://packagist.org/packages/pabloleone/artisan-ui) [![PHP Version Require](http://poser.pugx.org/pabloleone/artisan-ui/require/php)](https://packagist.org/packages/pabloleone/artisan-ui)
+![GitHub Actions](https://github.com/pabloleone/artisan-ui/actions/workflows/main.yml/badge.svg)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+A nice GUI for Laravel Artisan, ready out of the box, configurable and handy for non-CLI experienced developers.
 
-### Markdown
+> Supported commands must be developed in a way they can be fully set up by using arguments and options to avoid CLI interactions that CANNOT be reproduced on WEB.
+>
+> Commands issuing workers are not yet supported.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Installation
 
-```markdown
-Syntax highlighted code block
+You can install the package via composer:
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+composer require pabloleone/artisan-ui
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+## Usage
 
-### Jekyll Themes
+Once installed, if you are not using automatic package discovery, then you need to register the `\Pabloleone\ArtisanUi\ArtisanUiServiceProvider::class` service provider in your `config/app.php`.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/pabloleone/artisan-ui/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Extend
 
-### Support or Contact
+### Output & Description
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+To decorate the command output and description, publish the package configuration (`php artisan vendor:publish pabloleone/artisan-ui`) and add your class decorators in the specified array. Your decorators must implement the interface `Pabloleone\ArtisanUi\Models\Decorators\DecoratorInterface`.
+
+### Theme
+
+You can create your own theme for Artisan UI. To do so, publish the configuration and update the `theme` value with the name of the new theme you created inside its folder `resources/vendor/pabloleone/artisan-ui/views/themes/{YOUR_THEME}`
+
+```php
+...
+    'theme' => 'YOUR_THEME',
+...
+```
+
+### Code Style
+
+```bash
+vendor/bin/php-cs-fixer fix
+```
+
+### Testing
+
+```bash
+composer test
+```
+
+### Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+### Security
+
+If you discover any security related issues, please email [info@pabloleone.com](mailto:info@pabloleone.com) instead of using the issue tracker.
+
+## Credits
+
+- [Pablo Leone](https://github.com/pabloleone)
+- [All Contributors](../../contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## TODO
+
+Visit this [Trello Board](https://trello.com/b/PgS4yL8h/artisan-ui) to see the pending tasks for this package.

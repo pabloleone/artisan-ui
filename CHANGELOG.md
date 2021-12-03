@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/pabloleone/artisan-ui/compare/v1.0.0...v1.1.0) (2021-12-03)
+
+
+### Features
+
+* semantic release improvement ([ae94e67](https://github.com/pabloleone/artisan-ui/commit/ae94e677f814dd7522e0b9c738e68020a1a88f48))
+
 # Changelog
 
 All notable changes to `artisan-ui` will be documented in this file.

@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/pabloleone/artisan-ui/compare/v1.1.0...v1.2.0) (2021-12-03)
+
+
+### Features
+
+* add code coverage, amend changelog and improve ci pipeline ([1df14ca](https://github.com/pabloleone/artisan-ui/commit/1df14ca99cf59f7966f9b60fbe93ddaf69c4865f))
+
 # [1.1.0](https://github.com/pabloleone/artisan-ui/compare/v1.0.0...v1.1.0) (2021-12-03)
 
 
@@ -22,4 +29,3 @@
 ### Features
 
 * initial release
-

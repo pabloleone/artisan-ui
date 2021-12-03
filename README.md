@@ -1,7 +1,7 @@
 # Artisan UI
 
 [![Latest Stable Version](http://poser.pugx.org/pabloleone/artisan-ui/v)](https://packagist.org/packages/pabloleone/artisan-ui) [![Total Downloads](http://poser.pugx.org/pabloleone/artisan-ui/downloads)](https://packagist.org/packages/pabloleone/artisan-ui) [![Latest Unstable Version](http://poser.pugx.org/pabloleone/artisan-ui/v/unstable)](https://packagist.org/packages/pabloleone/artisan-ui) [![License](http://poser.pugx.org/pabloleone/artisan-ui/license)](https://packagist.org/packages/pabloleone/artisan-ui) [![PHP Version Require](http://poser.pugx.org/pabloleone/artisan-ui/require/php)](https://packagist.org/packages/pabloleone/artisan-ui)
-![GitHub Actions](https://github.com/pabloleone/artisan-ui/actions/workflows/main.yml/badge.svg)
+![GitHub Actions](https://github.com/pabloleone/artisan-ui/actions/workflows/main.yml/badge.svg) [![codecov](https://codecov.io/gh/pabloleone/artisan-ui/branch/master/graph/badge.svg?token=L13IC5JUV8)](https://codecov.io/gh/pabloleone/artisan-ui)
 
 A nice GUI for Laravel Artisan, ready out of the box, configurable and handy for non-CLI experienced developers.
 

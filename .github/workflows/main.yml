@@ -48,7 +48,11 @@ jobs:
               run: vendor/bin/php-cs-fixer fix --dry-run
 
             - name: Test
-              run: vendor/bin/phpunit
+              run: |
+                  vendor/bin/phpunit
+                  bash <(curl -s https://codecov.io/bash)
+              env:
+                CODECOV_TOKEN: 09427d7c-7242-4a20-93d6-b61d6f59919c
 
             - name: Release
               run: npx semantic-release

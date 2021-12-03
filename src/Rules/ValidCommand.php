@@ -3,7 +3,6 @@
 namespace Pabloleone\ArtisanUi\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\Artisan;
 
 class ValidCommand implements Rule
 {

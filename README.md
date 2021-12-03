@@ -25,7 +25,9 @@ Once installed, if you are not using automatic package discovery, then you need 
 
 ### Output & Description
 
-To decorate the command output and description, publish the package configuration (`php artisan vendor:publish pabloleone/artisan-ui`) and add your class decorators in the specified array. Your decorators must implement the interface `Pabloleone\ArtisanUi\Models\Decorators\DecoratorInterface`.
+To decorate the command output and description, publish the package configuration
+(`php artisan vendor:publish pabloleone/artisan-ui`) and add your class decorators in the specified array. Your
+decorators must implement the interface `Pabloleone\ArtisanUi\Models\Decorators\DecoratorInterface`.
 
 ### Theme
 
@@ -70,6 +72,7 @@ If you discover any security related issues, please email [info@pabloleone.com](
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## TODO
+## TO DOs
 
-Visit this [Trello Board](https://trello.com/b/PgS4yL8h/artisan-ui) to see the pending tasks for this package.
+Visit this [Project Board](https://github.com/pabloleone/artisan-ui/projects/1) to see the pending tasks for this
+package.

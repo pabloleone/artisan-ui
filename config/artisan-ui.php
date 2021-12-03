@@ -46,15 +46,13 @@ return [
     */
 
     'excluded' => [
-        // TODO: explain why each of these commands have been disabled
-        'serve',
-        'tinker',
-        'queue:listen',
-        'queue:monitor',
-        'schedule:work',
-        'queue:work',
-        'sail:install',
-        'model:prune'
+        'serve', // The app is up and running already, is it?
+        'tinker', // You don't want to play with this on the web!
+        'queue:listen', // Workers are not yet supported, I'm afraid
+        'queue:monitor', // Workers are not yet supported, I'm afraid
+        'schedule:work', // Workers are not yet supported, I'm afraid
+        'queue:work', // Workers are not yet supported, I'm afraid
+        'sail:install', // This is a very sensitive command you wouldn't want to run easily
     ],
 
     /*
@@ -68,7 +66,6 @@ return [
     */
 
     'decorators' => [
-        // TODO: add decorators to commands that require them
         // 'inspire' => Pabloleone\ArtisanUi\Models\Decorators\Inspire::class,
     ]
 ];

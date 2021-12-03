@@ -42,7 +42,7 @@ class ArtisanUi
         $commands = $this->getAvailableCommands();
         return $this->getAvailableSectionsFromCommands()->map(function ($sectionId) use ($commands) {
             $section = new Section();
-            $section->setSectionId($sectionId);
+            $section->setId($sectionId);
 
             $sectionCommands = $this->getCommandsBySectionId($sectionId, $commands)->sort();
 

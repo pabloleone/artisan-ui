@@ -50,9 +50,6 @@ class Artisan extends BaseController
 
         $sections = $this->artisanUi->getSectionsTree();
 
-        // TODO: Display confirmation alert with custom messages for certain
-        // commands which execution can cause disruption or when env is
-        // production (ex. down command)
         return view(
             'artisan-ui::themes.'.config('artisan-ui.theme').'.main',
             compact('exitCode', 'output', 'sections', 'commandId')

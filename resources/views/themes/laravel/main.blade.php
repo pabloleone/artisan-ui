@@ -56,25 +56,28 @@
             }
           }
         </style>
+
         <script>
             function onChange(object) {
                 const value = object.value;
                 scrollToCommand(value);
             }
+
             function scrollToCommand(value) {
                 window.location.href = value;
             }
         </script>
     </head>
     <body>
+
         <!-- Mobile navigation -->
         <nav class="d-block d-sm-block d-md-block d-lg-none navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container-fluid">
                 <select id="navigation" class="form-select form-select-sm" onchange="onChange(this)" aria-label=".form-select-sm example">
                     <option selected>Open this select menu</option>
                     @foreach ($sections as $key => $section)
-                        <optgroup label="{{ $section->id === "" ? __('artisan-ui::main.availableCommands') : $section->id }}">
-                            @foreach ($section->commands as $command)
+                        <optgroup label="{{ $section->getId() === "" ? __('artisan-ui::main.availableCommands') : $section->getId() }}">
+                            @foreach ($section->getCommands() as $command)
                                 <option value="#{{ Str::snake($command->getName()) }}">{{ $command->getName() }}</option>
                             @endforeach
                         </optgroup>
@@ -100,7 +103,7 @@
                                     aria-expanded="false"
                                     aria-controls="collapse{{ $key }}"
                                 >
-                                    {{ $section->id === "" ? __('artisan-ui::main.availableCommands') : $section->id }}
+                                    {{ $section->getId() === "" ? __('artisan-ui::main.availableCommands') : $section->getId() }}
                                 </button>
                                 </h2>
                                 <div
@@ -110,7 +113,7 @@
                                     data-bs-parent="#accordionExample"
                                 >
                                     <div class="accordion-body p-1">
-                                        @foreach ($section->commands as $command)
+                                        @foreach ($section->getCommands() as $command)
                                             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#{{ Str::snake($command->getName()) }}">
                                                 {{ $command->getName() }}
                                             </a>
@@ -144,7 +147,7 @@
                         @endif
 
                         @foreach ($sections as $section)
-                            @foreach ($section->commands as $command)
+                            @foreach ($section->getCommands() as $command)
 
                                 <!-- Card -->
                                 <div class="card mb-4">
@@ -189,8 +192,6 @@
 
                                         <!-- Card footer-->
                                         <div class="card-footer collapse" id="collapseTryOut{{ Str::replace(':', '', Str::snake($command->getName())) }}">
-                                            {{-- // TODO: when multiple values separated by comma can be added, implement input tags (create bootstrap component) --}}
-                                            {{-- any new field with certain tag will display a badge on blur, comma, or intro with an option to remove the tag from the field --}}
                                             @if ($arguments = $command->getArguments())
                                                 <h4>{{ __('artisan-ui::main.arguments') }}</h4>
                                                 @foreach ($arguments as $argument)
@@ -223,6 +224,7 @@
                                                 <button class="btn btn-primary" type="submit">{{ __('artisan-ui::main.execute') }}</button>
                                             </div>
                                         </div>
+
                                     </form>
                                 </div>
                             @endforeach

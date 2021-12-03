@@ -52,3 +52,5 @@ jobs:
 
             - name: Release
               run: npx semantic-release
+              with:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
